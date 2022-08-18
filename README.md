@@ -1,2 +1,5 @@
 # memfiredb-gui-vsix
-vscode上的memfiredb可视化数据库管理插件
+> vscode上的memfiredb可视化数据库管理插件
+
+## demo
+![demo](./demo.gif)

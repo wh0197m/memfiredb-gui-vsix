@@ -2,8 +2,8 @@
 	"name": "memfiredb",
 	"displayName": "memfiredb",
 	"description": "vscode上的memfiredb可视化数据库管理插件",
-	"version": "0.1.0",
-	"publisher": "memfire",
+	"version": "0.1.1",
+	"publisher": "wh01am",
 	"icon": "assets/icon.png",
 	"keywords": [
 		"database",
