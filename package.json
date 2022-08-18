@@ -1,0 +1,190 @@
+{
+	"name": "memfiredb",
+	"displayName": "memfiredb",
+	"description": "vscode上的memfiredb可视化数据库管理插件",
+	"version": "0.1.0",
+	"publisher": "memfire",
+	"icon": "assets/icon.png",
+	"keywords": [
+		"database",
+		"sql",
+		"vscode",
+		"db",
+		"postgresql",
+		"memfire"
+	],
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/wh0197m/memfiredb-gui-vsix.git"
+	},
+	"engines": {
+		"vscode": "^1.47.3"
+	},
+	"categories": [
+		"Visualization"
+	],
+	"activationEvents": [
+		"onStartupFinished"
+	],
+	"main": "./app/extension.js",
+	"contributes": {
+		"viewsContainers": {
+			"activitybar": [
+				{
+					"id": "main-window",
+					"title": "memfiredb",
+					"icon": "assets/icon.svg"
+				}
+			]
+		},
+		"views": {
+			"main-window": [
+				{
+					"id": "connection",
+					"name": "连接",
+					"icon": "assets/icon.svg"
+				},
+				{
+					"id": "help",
+					"name": "帮助和反馈",
+					"icon": "assets/icon.svg"
+				}
+			]
+		},
+		"viewsWelcome": [
+			{
+				"view": "connection",
+				"contents": "点击右上方 “+” 或下面按钮，以连接数据库\n[创建连接](command:memfire.addConnection)"
+			},
+			{
+				"view": "help",
+				"contents": "MemFireDB：支持pg协议的在线分布式云数据库\n[$(comment-discussion)微信交流](command:memfire.wechat)\n[$(trash)清空连接数据](command:memfire.empty)"
+			}
+		],
+		"commands": [
+			{
+				"command": "memfire.addConnection",
+				"title": "Add Connection",
+				"icon": "$(add)",
+				"category": "MEMFIRE"
+			},
+			{
+				"command": "memfire.editTreeItem",
+				"title": "编辑",
+				"icon": "$(edit)",
+				"category": "MEMFIRE"
+			},
+			{
+				"command": "memfire.deleteTreeItem",
+				"title": "删除",
+				"icon": "$(trash)",
+				"category": "MEMFIRE"
+			},
+			{
+				"command": "memfire.empty",
+				"title": "Empty All",
+				"icon": "$(trash)",
+				"category": "MEMFIRE"
+			},
+			{
+				"command": "memfire.refreshTreeChildren",
+				"title": "Refresh Children",
+				"icon": "$(refresh)",
+				"category": "MEMFIRE"
+			},
+			{
+				"command": "memfire.terminal",
+				"title": "系统终端",
+				"icon": "$(terminal)",
+				"category": "MEMFIRE"
+			},
+			{
+				"command": "memfire.sqlTerminal",
+				"title": "SQL 终端",
+				"icon": "$(terminal)",
+				"category": "MEMFIRE"
+			},
+			{
+				"command": "memfire.exportDML",
+				"title": "导出数据 DML",
+				"icon": "$(export)",
+				"category": "MEMFIRE"
+			},
+			{
+				"command": "memfire.exportDDL",
+				"title": "导出表结构 DDL",
+				"icon": "$(export)",
+				"category": "MEMFIRE"
+			},
+			{
+				"command": "memfire.export",
+				"title": "导出 DDL 和 DML",
+				"icon": "$(export)",
+				"category": "MEMFIRE"
+			}
+		],
+		"menus": {
+			"view/title": [
+				{
+					"command": "memfire.addConnection",
+					"when": "view == connection",
+					"group": "navigation"
+				},
+				{
+					"command": "memfire.refreshTreeChildren",
+					"when": "view == connection",
+					"group": "navigation"
+				}
+			],
+			"view/item/context": [
+				{
+					"command": "memfire.refreshTreeChildren",
+					"when": "view == connection && viewItem =~ /^connection$|^pgDatabase$|^pgSchema$/",
+					"group": "inline"
+				},
+				{
+					"command": "memfire.editTreeItem",
+					"when": "view == connection && viewItem =~ /^connection$/",
+					"group": "1_conn@1"
+				},
+				{
+					"command": "memfire.deleteTreeItem",
+					"when": "view == connection && viewItem =~ /^connection$/",
+					"group": "1_conn@2"
+				},
+				{
+					"command": "memfire.exportDML",
+					"when": "view == connection && viewItem =~ /^table$|^pgSchema$/",
+					"group": "2_export@1"
+				},
+				{
+					"command": "memfire.exportDDL",
+					"when": "view == connection && viewItem =~ /^table$|^pgSchema$/",
+					"group": "2_export@2"
+				},
+				{
+					"command": "memfire.export",
+					"when": "view == connection && viewItem =~ /^table$|^pgSchema$/",
+					"group": "2_export@3"
+				},
+				{
+					"command": "memfire.sqlTerminal",
+					"when": "view == connection && viewItem =~ /^connection$|^pgDatabase$/",
+					"group": "9_other@1"
+				}
+			]
+		}
+	},
+	"devDependencies": {
+		"@types/node": "14.x",
+		"@types/vscode": "^1.47.3"
+	},
+	"dependencies": {
+		"knex": "^2.1.0",
+		"mysql2": "^2.3.3",
+		"pg": "^8.7.3",
+		"sqlite3": "^5.0.5",
+		"tedious": "^15.0.0",
+		"uuid": "^8.3.2"
+	}
+}

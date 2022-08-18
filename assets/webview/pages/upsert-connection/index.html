@@ -1,0 +1,34 @@
+<div id="vue-app" class="flex-container">
+  <div class="form-container">
+    <div class="forms">
+      <div class="title">
+        <h3>MemFireDB</h3>
+      </div>
+      <div class="private form">
+        <label class='require'>
+          <span>连接名称</span>
+          <memfire-input v-model="record.name" />
+        </label>
+<!--        <template v-if="record.useUrl && adapter.urlSupport">-->
+<!--          <label class="long-txt">-->
+<!--            <span>URL</span>-->
+<!--            <memfire-input v-model="record.url"></memfire-input>-->
+<!--          </label>-->
+<!--        </template>-->
+        <template v-else v-for="f in fields">
+          <label v-if="adapter.keys.indexOf(f.key) > -1" :class="{ 'long-txt': f.type=='file' }" class='require'>
+            <span>{{f.label}}</span>
+            <file-input v-if="f.type == 'file'" v-model="record[f.key]"></file-input>
+            <memfire-input v-else v-model="record[f.key]">
+          </label>
+        </template>
+      </div>
+    </div>
+  </div>
+  <div class="form-btns">
+    <button @click="save(true)">连接</button>
+  </div>
+  <div class='tips'>
+    <a href='https://cloud.memfiredb.com/auth/login?from=eJEUkm' style='text-decoration: none'>快速获取限时免费的MemFireDB数据库</a>
+  </div>
+</div>

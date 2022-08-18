@@ -1,0 +1,12 @@
+<div id="vue-app">
+  <textarea v-model="sql" v-focus @keydown="keydown"></textarea>
+  <div class="options">
+    <div></div>
+    <span>
+      <!-- <button>导出至文件</button> -->
+      <button @click="exec">执行</button>
+    </span>
+  </div>
+
+  <result-view :result="result"></result-view>
+</div>
